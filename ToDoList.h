@@ -5,7 +5,7 @@
 #ifndef ELABORATOTODOLIST_TODOLIST_H
 #define ELABORATOTODOLIST_TODOLIST_H
 
-#include <vector>
+#include <list>
 #include "Item.h"
 
 using namespace std;
@@ -26,7 +26,7 @@ public:
     void display();
 
 private:
-    vector<Item> list;
+    list<Item> list;
 };
 
 

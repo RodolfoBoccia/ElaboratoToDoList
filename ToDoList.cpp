@@ -20,20 +20,30 @@ void ToDoList::remove() {
     int pos;
     cout << "Inserisci numero del ToDo da rimuovere" << endl;
     cin >> pos;
-    list.erase(list.begin()+(--pos));
-    display();
+    if(pos <= list.size() && pos > 0){
+        auto iterator = list.begin();
+        advance(iterator, --pos);
+        list.erase(iterator);
+        display();
+    }
+    else throw (out_of_range) "Accesso ad elemento non presente";
 }
 
 void ToDoList::check() {
     int pos;
     cout << "Inserisci numero del ToDo da spuntare" << endl;
     cin >> pos;
-    list[--pos].setCheck("Completata");
-    display();
+    if(pos <= list.size() && pos > 0){
+        auto iterator = list.begin();
+        advance(iterator, --pos);
+        iterator->setCheck("Completata");
+        display();
+    }
+    else throw (out_of_range) "Accesso ad elemento non presente";
 }
 
 void ToDoList::display() {
-    cout << "Lista ToDo" << endl;
+    cout << "Lista ToDo: " << endl;
     int i=1;
     for(const auto& ToDo : list){
         cout << i<<")" << ToDo.getTitle()<<"\t"<<ToDo.getCheck() << endl;

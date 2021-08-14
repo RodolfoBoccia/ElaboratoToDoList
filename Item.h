@@ -11,7 +11,7 @@ using namespace std;
 class Item {
 public:
 
-    explicit Item(const string& newTitle) : title{newTitle} {}
+    explicit Item(const string& newTitle, const string& isCheck = "Incompleta") : title{newTitle}, check{isCheck} {}
 
     ~Item() = default;
 
@@ -29,8 +29,7 @@ public:
 
 private:
     string title;
-
-    string check{"Incompleta"};
+    string check;
 };
 
 

@@ -25,6 +25,9 @@ public:
 
     void display();
 
+    void writing();
+
+    void read();
 private:
     list<Item> list;
 };

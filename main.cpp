@@ -1,14 +1,13 @@
 #include <iostream>
-#include "Item.h"
+#include "ToDo.h"
 #include "ToDoList.h"
 
 int main() {
-    ToDoList elenco;
-    elenco.read();
+    ToDoList toDoList;
+    toDoList.read();
 
-    while(true)
-    {
-        elenco.display();
+    while (true) {
+        toDoList.display();
         cout << "/ Menu /" << endl;
         cout << "1) Aggiungi" << endl;
         cout << "2) Rimuovi" << endl;
@@ -20,16 +19,16 @@ int main() {
         cin >> choice;
         cout << endl;
 
-        try{
+        try {
             switch (choice) {
                 case 1:
-                    elenco.add();
+                    toDoList.add();
                     break;
                 case 2:
-                    elenco.remove();
+                    toDoList.remove();
                     break;
                 case 3:
-                    elenco.check();
+                    toDoList.setToDoCompleted();
                     break;
                 case 0:
                     return 0;
@@ -37,7 +36,7 @@ int main() {
                     break;
             }
         }
-        catch (const out_of_range& e){
+        catch (const out_of_range &e) {
             cerr << e.what() << endl;
         }
     }

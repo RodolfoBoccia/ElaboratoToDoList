@@ -3,4 +3,8 @@ project(ElaboratoToDoList)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(ElaboratoToDoList main.cpp ToDoList.cpp ToDoList.h Item.h)
+add_subdirectory(test)
+set (SOURCE_FILES ToDoList.cpp ToDoList.h ToDo.h)
+add_executable(ElaboratoToDoList main.cpp)
+add_library (core ${SOURCE_FILES})
+target_link_libraries (ElaboratoToDoList core)

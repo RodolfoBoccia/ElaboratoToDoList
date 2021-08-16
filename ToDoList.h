@@ -5,11 +5,10 @@
 #ifndef ELABORATOTODOLIST_TODOLIST_H
 #define ELABORATOTODOLIST_TODOLIST_H
 
+#include "ToDo.h"
 #include <list>
-#include "Item.h"
 
 using namespace std;
-
 
 class ToDoList {
 public:
@@ -21,15 +20,16 @@ public:
 
     void remove();
 
-    void check();
+    void setToDoCompleted();
 
     void display();
 
-    void writing();
+    void write();
 
     void read();
+
 private:
-    list<Item> list;
+    list<ToDo> list;
 };
 
 

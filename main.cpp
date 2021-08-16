@@ -9,14 +9,16 @@ int main() {
     while(true)
     {
         elenco.display();
-        cout << "Scrivi il numero dell'operazione scelta" << endl;
+        cout << "/ Menu /" << endl;
         cout << "1) Aggiungi" << endl;
         cout << "2) Rimuovi" << endl;
         cout << "3) Imposta completato" << endl;
-        cout << "0) Esci" << endl;
+        cout << "0) Esci" << endl << endl;
 
         int choice;
+        cout << "Scrivi il numero dell'operazione da eseguire: ";
         cin >> choice;
+        cout << endl;
 
         try{
             switch (choice) {

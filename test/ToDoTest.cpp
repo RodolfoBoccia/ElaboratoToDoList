@@ -8,7 +8,7 @@
 TEST(ToDo, TestGetterSetter){
     ToDo t("Fare la spesa");
     ASSERT_EQ(t.getText(), "Fare la spesa");
-    ASSERT_EQ(t.isCompleted(), "-Incompleta-");
+    ASSERT_EQ(t.isCompleted(), "-Incompleto-");
     t.setCompleted();
-    ASSERT_EQ(t.isCompleted(), "+Completata+");
+    ASSERT_EQ(t.isCompleted(), "+Completato+");
 }

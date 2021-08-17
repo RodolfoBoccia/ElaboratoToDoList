@@ -16,7 +16,7 @@ public:
 
     ~ToDoList() = default;
 
-    void add(string text);
+    void add(const string& text);
 
     void remove(int pos);
 

@@ -12,12 +12,12 @@ using namespace std;
 class ToDo {
 public:
 
-    explicit ToDo(const string &text, const string &completed = "-Incompleta-") : text{text}, completed{completed} {}
+    explicit ToDo(const string &text, const string &completed = "-Incompleto-") : text{text}, completed{completed} {}
 
     ~ToDo() = default;
 
     void setCompleted() {
-        ToDo::completed = "+Completata+";
+        ToDo::completed = "+Completato+";
     }
 
     const string &getText() const {

@@ -8,7 +8,7 @@
 
 using namespace std;
 
-void ToDoList::add(string text) {
+void ToDoList::add(const string& text) {
     ToDo toDo(text);
     list.push_back(toDo);
 }
@@ -58,12 +58,12 @@ void ToDoList::read() {
         while (getline(file, line)) {
             if (line.empty())
                 continue;
-            else if (line.find("+Completata+") != string::npos) {
-                line = line.substr(0, line.find("+Completata+") - 3);
-                ToDo toDo(line, "+Completata+");
+            else if (line.find("+Completato+") != string::npos) {
+                line = line.substr(0, line.find("+Completato+") - 3);
+                ToDo toDo(line, "+Completato+");
                 list.push_back(toDo);
-            } else if (line.find("-Incompleta-") != string::npos) {
-                line = line.substr(0, line.find("-Incompleta-") - 3);
+            } else if (line.find("-Incompleto-") != string::npos) {
+                line = line.substr(0, line.find("-Incompleto-") - 3);
                 ToDo toDo(line);
                 list.push_back(toDo);
             }

@@ -5,9 +5,7 @@
 #include "gtest/gtest.h"
 #include "../ToDo.h"
 
-
-
-TEST(ToDo,GetterSetter){
+TEST(ToDo, TestGetterSetter){
     ToDo t("Fare la spesa");
     ASSERT_EQ(t.getText(), "Fare la spesa");
     ASSERT_EQ(t.isCompleted(), "-Incompleta-");

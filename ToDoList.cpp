@@ -8,12 +8,12 @@
 
 using namespace std;
 
-void ToDoList::add(string &text) {
+void ToDoList::add(string text) {
     ToDo toDo(text);
     list.push_back(toDo);
 }
 
-void ToDoList::remove(int &pos) {
+void ToDoList::remove(int pos) {
     if (pos <= list.size() && pos > 0) {
         auto it = list.begin();
         advance(it, --pos);
@@ -21,7 +21,7 @@ void ToDoList::remove(int &pos) {
     } else throw (out_of_range) "Accesso ad elemento non presente";
 }
 
-void ToDoList::setToDoCompleted(int &pos) {
+void ToDoList::setToDoCompleted(int pos) {
     if (pos <= list.size() && pos > 0) {
         auto it = list.begin();
         advance(it, --pos);

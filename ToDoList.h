@@ -16,11 +16,11 @@ public:
 
     ~ToDoList() = default;
 
-    void add();
+    void add(string &text);
 
-    void remove();
+    void remove(int &pos);
 
-    void setToDoCompleted();
+    void setToDoCompleted(int &pos);
 
     void display();
 

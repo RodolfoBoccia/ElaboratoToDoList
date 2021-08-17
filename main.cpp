@@ -1,10 +1,18 @@
-#include <iostream>
 #include "ToDo.h"
 #include "ToDoList.h"
+#include <limits>
+#include <iostream>
 
 int main() {
     ToDoList toDoList;
-    toDoList.read();
+    try{
+        toDoList.read();
+        toDoList.write();
+    } catch (const runtime_error &e){
+        cerr << e.what() << endl;
+        return 0;
+    }
+
 
     while (true) {
         toDoList.display();
@@ -21,15 +29,34 @@ int main() {
 
         try {
             switch (choice) {
-                case 1:
-                    toDoList.add();
+                case 1:{
+                    string text;
+                    cout << "Inserisci la descrizione del nuovo toDo: ";
+                    cin.ignore();
+                    getline(cin, text);
+                    cout << endl;
+                    toDoList.add(text);
+                    toDoList.write();
                     break;
-                case 2:
-                    toDoList.remove();
+                }
+                case 2:{
+                    int pos;
+                    cout << "Inserisci il numero del ToDo da rimuovere: ";
+                    cin >> pos;
+                    cout << endl;
+                    toDoList.remove(pos);
+                    toDoList.write();
                     break;
-                case 3:
-                    toDoList.setToDoCompleted();
+                }
+                case 3:{
+                    int pos;
+                    cout << "Inserisci il numero del ToDo da segnare come completato: ";
+                    cin >> pos;
+                    cout << endl;
+                    toDoList.setToDoCompleted(pos);
+                    toDoList.write();
                     break;
+                }
                 case 0:
                     return 0;
                 default:
@@ -38,6 +65,12 @@ int main() {
         }
         catch (const out_of_range &e) {
             cerr << e.what() << endl;
+            std::cin.clear();
+            std::cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+        catch (const runtime_error &e) {
+            cerr << e.what() << endl;
+            return 0;
         }
     }
 }

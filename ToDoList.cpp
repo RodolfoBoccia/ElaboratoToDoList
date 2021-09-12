@@ -29,11 +29,35 @@ void ToDoList::setToDoCompleted(int pos) {
     } else throw (out_of_range) "Accesso ad elemento non presente";
 }
 
-void ToDoList::display() {
+void ToDoList::displayAll() {
     cout << "Lista ToDo: " << endl;
     int i = 1;
     for (const auto& toDo : list){
         cout << i << ") " << toDo.getText() << "   " << toDo.convertCompleted() << "   "  << toDo.getDate().getDay() << "/" << toDo.getDate().getMonth() << "/" << toDo.getDate().getYear() << endl;
+        i++;
+    }
+    cout << endl;
+}
+
+void ToDoList::displayCompleted() {
+    cout << "ToDo completati: " << endl;
+    int i = 1;
+    for (const auto& toDo : list){
+        if(toDo.isCompleted()){
+            cout << i << ") " << toDo.getText() << "   " << toDo.convertCompleted() << "   "  << toDo.getDate().getDay() << "/" << toDo.getDate().getMonth() << "/" << toDo.getDate().getYear() << endl;
+        }
+        i++;
+    }
+    cout << endl;
+}
+
+void ToDoList::displayNotCompleted() {
+    cout << "ToDo non completati: " << endl;
+    int i = 1;
+    for (const auto& toDo : list){
+        if(!toDo.isCompleted()){
+            cout << i << ") " << toDo.getText() << "   " << toDo.convertCompleted() << "   "  << toDo.getDate().getDay() << "/" << toDo.getDate().getMonth() << "/" << toDo.getDate().getYear() << endl;
+        }
         i++;
     }
     cout << endl;

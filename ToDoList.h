@@ -20,7 +20,11 @@ public:
 
     void setToDoCompleted(int pos);
 
-    void display();
+    void displayAll();
+
+    void displayCompleted();
+
+    void displayNotCompleted();
 
     void write();
 

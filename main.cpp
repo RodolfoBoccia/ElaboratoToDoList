@@ -12,14 +12,16 @@ int main() {
         cerr << e.what() << endl;
         return 0;
     }
-
+    toDoList.displayAll();
 
     while (true) {
-        toDoList.display();
         cout << "/ Menu /" << endl;
         cout << "1) Aggiungi" << endl;
         cout << "2) Rimuovi" << endl;
         cout << "3) Imposta completato" << endl;
+        cout << "4) Visualizza completati" << endl;
+        cout << "5) Visualizza non completati" << endl;
+        cout << "6) Visualizza tutti" << endl;
         cout << "0) Esci" << endl << endl;
 
         int choice;
@@ -37,6 +39,7 @@ int main() {
                     cout << "Inserisci la descrizione del nuovo toDo: ";
                     cin.ignore();
                     getline(cin, text);
+                    cout << endl;
                     cout << "Inserisci il giorno: ";
                     cin >> day;
                     cout << "Inserisci il mese: ";
@@ -68,6 +71,15 @@ int main() {
                     toDoList.write();
                     break;
                 }
+                case 4:
+                    toDoList.displayCompleted();
+                    break;
+                case 5:
+                    toDoList.displayNotCompleted();
+                    break;
+                case 6:
+                    toDoList.displayAll();
+                    break;
                 case 0:
                     return 0;
                 default:

@@ -6,9 +6,10 @@
 #include "../ToDo.h"
 
 TEST(ToDo, TestGetterSetter){
-    ToDo t("Fare la spesa");
+    Date date( 20, 10, 2021);
+    ToDo t("Fare la spesa", date);
     ASSERT_EQ(t.getText(), "Fare la spesa");
-    ASSERT_EQ(t.isCompleted(), "-Incompleto-");
+    ASSERT_EQ(t.isCompleted(), false);
     t.setCompleted();
-    ASSERT_EQ(t.isCompleted(), "+Completato+");
+    ASSERT_EQ(t.isCompleted(), true);
 }

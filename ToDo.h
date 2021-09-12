@@ -5,32 +5,48 @@
 #ifndef ELABORATOTODOLIST_TODO_H
 #define ELABORATOTODOLIST_TODO_H
 
+#include <ctime>
 #include <string>
+#include "Date.h"
 
 using namespace std;
 
 class ToDo {
 public:
 
-    explicit ToDo(const string &text, const string &completed = "-Incompleto-") : text{text}, completed{completed} {}
+    explicit ToDo(const string &text, const Date date, const bool &completed = false) : text{text}, completed{completed}, date{date} {}
 
     ~ToDo() = default;
 
-    void setCompleted() {
-        ToDo::completed = "+Completato+";
+    string convertCompleted() const{
+        string s;
+        if(completed){
+            s = "+Completato+";
+        }
+        else s = "-Incompleto-";
+        return s;
     }
 
     const string &getText() const {
         return text;
     }
 
-    const string &isCompleted() const {
+    bool isCompleted() const {
         return completed;
+    }
+
+    void setCompleted() {
+        ToDo::completed = true;
+    }
+
+    const Date &getDate() const {
+        return date;
     }
 
 private:
     string text;
-    string completed;
+    bool completed;
+    Date date;
 };
 
 

@@ -31,11 +31,22 @@ int main() {
             switch (choice) {
                 case 1:{
                     string text;
+                    int day;
+                    int month;
+                    int year;
                     cout << "Inserisci la descrizione del nuovo toDo: ";
                     cin.ignore();
                     getline(cin, text);
+                    cout << "Inserisci il giorno: ";
+                    cin >> day;
+                    cout << "Inserisci il mese: ";
+                    cin >> month;
+                    cout << "Inserisci l anno: ";
+                    cin >> year;
                     cout << endl;
-                    toDoList.add(text);
+                    Date date(day, month, year);
+                    date.validityDate();
+                    toDoList.add(text, date);
                     toDoList.write();
                     break;
                 }

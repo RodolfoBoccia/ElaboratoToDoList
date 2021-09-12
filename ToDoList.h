@@ -8,15 +8,13 @@
 #include "ToDo.h"
 #include <list>
 
-using namespace std;
-
 class ToDoList {
 public:
     ToDoList() = default;
 
     ~ToDoList() = default;
 
-    void add(const string& text);
+    void add(const string& text, const Date& date);
 
     void remove(int pos);
 
@@ -29,7 +27,7 @@ public:
     void read();
 
 private:
-    list<ToDo> list;
+    std::list<ToDo> list;
 };
 
 

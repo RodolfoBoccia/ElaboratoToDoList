@@ -10,7 +10,7 @@
 
 class ToDoList {
 public:
-    ToDoList() = default;
+    explicit ToDoList(const string& title): title{title} {}
 
     ~ToDoList() = default;
 
@@ -20,17 +20,28 @@ public:
 
     void setToDoCompleted(int pos);
 
-    void displayAll();
-
     void displayCompleted();
 
     void displayNotCompleted();
 
-    void write();
+    void display() const;
 
-    void read();
+    bool operator==(const ToDoList& right) const {
+        if ( title == right.title )
+            return true;
+        else return false;
+    }
+
+    const string &getTitle() const {
+        return title;
+    }
+
+    const std::list<ToDo> &getList() const {
+        return list;
+    }
 
 private:
+    string title;
     std::list<ToDo> list;
 };
 

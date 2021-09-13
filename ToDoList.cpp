@@ -4,7 +4,6 @@
 
 #include "ToDoList.h"
 #include <iostream>
-#include <fstream>
 
 using namespace std;
 
@@ -30,7 +29,6 @@ void ToDoList::setToDoCompleted(int pos) {
 }
 
 void ToDoList::displayCompleted() {
-    cout << "ToDo completati: " << endl;
     int i = 1;
     for (const auto& toDo : list){
         if(toDo.isCompleted()){
@@ -42,7 +40,6 @@ void ToDoList::displayCompleted() {
 }
 
 void ToDoList::displayNotCompleted() {
-    cout << "ToDo non completati: " << endl;
     int i = 1;
     for (const auto& toDo : list){
         if(!toDo.isCompleted()){

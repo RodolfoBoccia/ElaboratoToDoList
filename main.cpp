@@ -6,10 +6,9 @@
 #include <fstream>
 
 void displayAll(const std::list<ToDoList>& lists);
-
 void write(const std::list<ToDoList>& lists);
-
 void read(std::list<ToDoList>& lists);
+
 
 int main() {
     std::list<ToDoList> toDoLists;
@@ -24,13 +23,14 @@ int main() {
 
     while (true) {
         cout << "/ Menu /" << endl;
-        cout << "1) Aggiungi todo" << endl;
-        cout << "2) Rimuovi todo" << endl;
-        cout << "3) Imposta completato" << endl;
-        cout << "4) Visualizza completati" << endl;
-        cout << "5) Visualizza non completati" << endl;
-        cout << "6) Visualizza tutti" << endl;
-        cout << "7) Crea nuova lista" << endl;
+        cout << "1) Crea nuova lista" << endl;
+        cout << "2) Aggiungi todo" << endl;
+        cout << "3) Rimuovi todo" << endl;
+        cout << "4) Imposta completato" << endl;
+        cout << "5) Visualizza completati" << endl;
+        cout << "6) Visualizza non completati" << endl;
+        cout << "7) Visualizza tutti" << endl;
+        cout << "8) Rimuovi lista" << endl;
         cout << "0) Esci" << endl << endl;
 
         int choice;
@@ -40,7 +40,22 @@ int main() {
 
         try {
             switch (choice) {
-                case 1:{
+                case 1: {
+                    string title;
+                    cout << "Inserisci il titolo della nuova lista: ";
+                    cin.ignore();
+                    getline(cin, title);
+                    cout << endl;
+                    for(const auto& list : toDoLists){
+                        if(title == list.getTitle())
+                            throw (invalid_argument) "Non si possono avere liste con titoli uguali";
+                    }
+                    ToDoList list(title);
+                    toDoLists.push_back(list);
+                    write(toDoLists);
+                    break;
+                }
+                case 2:{
                     string title;
                     bool found = false;
                     cout << "Scrivi il titolo della lista dove inserire il toDo: ";
@@ -57,11 +72,11 @@ int main() {
                             cout << "Inserisci la descrizione del nuovo toDo: ";
                             getline(cin, text);
                             cout << endl;
-                            cout << "Inserisci il giorno: ";
+                            cout << "Inserisci il giorno (es 23): ";
                             cin >> day;
-                            cout << "Inserisci il mese: ";
+                            cout << "Inserisci il mese (es 8): ";
                             cin >> month;
-                            cout << "Inserisci l anno: ";
+                            cout << "Inserisci l anno (deve essere compreso tra 1900 e 2200): ";
                             cin >> year;
                             cout << endl;
                             Date date(day, month, year);
@@ -75,7 +90,7 @@ int main() {
                         break;
                     else throw (invalid_argument) "Lista non presente";
                 }
-                case 2:{
+                case 3:{
                     string title;
                     bool found = false;
                     cout << "Scrivi il titolo della lista dove rimuovere il toDo: ";
@@ -98,10 +113,10 @@ int main() {
                         break;
                     else throw (invalid_argument) "Lista non presente";
                 }
-                case 3:{
+                case 4:{
                     string title;
                     bool found = false;
-                    cout << "Scrivi il titolo della lista: ";
+                    cout << "Scrivi il titolo della lista dove segnare come completato il toDo: ";
                     cin.ignore();
                     getline(cin, title);
                     cout << endl;
@@ -121,55 +136,47 @@ int main() {
                         break;
                     else throw (out_of_range) "Lista non presente";
                 }
-                case 4:{
+                case 5:{
+                    for (auto& list : toDoLists){
+                        cout << "Lista: " << list.getTitle() << endl;
+                        list.displayCompleted();
+                    }
+                    break;
+                }
+                case 6:{
+                    for (auto& list : toDoLists){
+                        cout << "Lista: " << list.getTitle() << endl;
+                        list.displayNotCompleted();
+                    }
+                    break;
+                }
+                case 7:{
+                    displayAll(toDoLists);
+                    break;
+                }
+                case 8:{
                     string title;
                     bool found = false;
-                    cout << "Scrivi il titolo della lista: ";
+                    cout << "Inserisci il titolo della lista da rimuovere: ";
                     cin.ignore();
                     getline(cin, title);
                     cout << endl;
+                    auto it = toDoLists.begin();
                     for(auto& list : toDoLists){
                         if(title == list.getTitle()){
                             found = true;
-                            list.displayCompleted();
+                            toDoLists.erase(it);
                             break;
                         }
-                    }
-                    if(found)
-                        break;
-                    else throw (out_of_range) "Lista non presente";
-                }
-                case 5: {
-                    string title;
-                    bool found = false;
-                    cout << "Scrivi il titolo della lista: ";
-                    cin.ignore();
-                    getline(cin, title);
-                    cout << endl;
-                    for (auto &list: toDoLists) {
-                        if (title == list.getTitle()) {
-                            found = true;
-                            list.displayNotCompleted();
-                            break;
+                        else{
+                            advance(it, 1);
                         }
                     }
-                    if (found)
+                    if (found) {
+                        write(toDoLists);
                         break;
+                    }
                     else throw (out_of_range) "Lista non presente";
-                }
-                case 6:
-                    displayAll(toDoLists);
-                    break;
-                case 7: {
-                    string title;
-                    cout << "Inserisci il titolo della lista: ";
-                    cin.ignore();
-                    getline(cin, title);
-                    cout << endl;
-                    ToDoList list(title);
-                    toDoLists.push_back(list);
-                    write(toDoLists);
-                    break;
                 }
                 case 0:
                     return 0;

@@ -13,3 +13,11 @@ TEST(ToDo, TestGetterSetter){
     t.setCompleted();
     ASSERT_EQ(t.isCompleted(), true);
 }
+
+TEST(ToDo, TestConvertCompletet){
+    Date date( 20, 10, 2021);
+    ToDo t("Fare la spesa", date);
+    ASSERT_EQ(t.convertCompleted(), "-Incompleto-");
+    t.setCompleted();
+    ASSERT_EQ(t.convertCompleted(), "+Completato+");
+}

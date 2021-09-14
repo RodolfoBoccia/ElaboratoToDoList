@@ -25,5 +25,5 @@ TEST(Date, TestValidityDate){
     date.setMonth(2);
     ASSERT_THROW(date.validityDate(), std::out_of_range);
     date.setYear(2024);
-    ASSERT_NO_THROW(date.validityDate());
+    ASSERT_EQ(date.validityDate(), true);
 }

@@ -14,7 +14,7 @@ using namespace std;
 class ToDo {
 public:
 
-    explicit ToDo(const string &text, const Date date, const bool &completed = false) : text{text}, completed{completed}, date{date} {}
+    explicit ToDo(const string &text, const Date date, const bool completed = false) : text{text}, completed{completed}, date{date} {}
 
     ~ToDo() = default;
 

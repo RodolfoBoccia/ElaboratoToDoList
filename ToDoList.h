@@ -14,7 +14,7 @@ public:
 
     ~ToDoList() = default;
 
-    void add(const string& text, const Date& date, const bool& completed);
+    void add(const string& text, const Date& date, const bool completed);
 
     void remove(int pos);
 

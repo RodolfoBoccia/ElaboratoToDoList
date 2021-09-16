@@ -7,7 +7,7 @@
 
 using namespace std;
 
-void ToDoList::add(const string& text, const Date& date, const bool& completed) {
+void ToDoList::add(const string& text, const Date& date, const bool completed) {
     ToDo toDo(text, date, completed);
     list.push_back(toDo);
 }

@@ -9,13 +9,13 @@
 
 class Date {
 public:
-    Date(int d, int m, int y) : day(d), month(m), year(y) {}
+    Date(int d, int m, int y) : day(d), month(m), year(y) {
+        validityDate(d, m, y);
+    }
 
-    bool isLeap() const;
+    bool isLeap(const int& year) const;
 
-    int daysOfMonth() const;
-
-    bool validityDate() const;
+    int daysOfMonth(const int& month, const int& year) const;
 
     void setDay(int d) {
         Date::day = d;
@@ -42,6 +42,8 @@ public:
     }
 
 private:
+    bool validityDate(const int& day, const int& month, const int& year) const;
+
     int day;
     int month;
     int year;

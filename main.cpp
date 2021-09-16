@@ -84,7 +84,6 @@ int main() {
                             cin >> year;
                             cout << endl;
                             Date date(day, month, year);
-                            date.validityDate();
                             list.add(text, date, false);
                             write(setOfLists);
                             break;

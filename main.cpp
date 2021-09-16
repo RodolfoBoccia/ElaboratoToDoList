@@ -1,17 +1,16 @@
 #include "ToDo.h"
 #include "ToDoList.h"
+#include "SetOfLists.h"
 #include <limits>
 #include <iostream>
-#include <vector>
 #include <fstream>
 
-void displayAll(const std::vector<ToDoList>& setOfLists);
-void write(const std::vector<ToDoList>& setOfLists);
-void read(std::vector<ToDoList>& setOfLists);
+void write( SetOfLists& setOfLists);
+void read(SetOfLists& setOfLists);
 
 
 int main() {
-    std::vector<ToDoList> setOfLists;
+    SetOfLists setOfLists;
     try{
         read(setOfLists);
         write(setOfLists);
@@ -19,7 +18,7 @@ int main() {
         cerr << e.what() << endl;
         return 0;
     }
-    displayAll(setOfLists);
+    setOfLists.displayAll();
 
     while (true) {
         cout << "/ Menu /" << endl;
@@ -46,38 +45,19 @@ int main() {
                     cin.ignore();
                     getline(cin, title);
                     cout << endl;
-                    for(const auto& list : setOfLists){
-                        if(title == list.getTitle())
-                            throw (invalid_argument) "Non si possono avere liste con titoli uguali";
-                    }
-                    ToDoList list(title);
-                    setOfLists.push_back(list);
+                    setOfLists.newList(title);
                     write(setOfLists);
                     break;
                 }
                 case 2:{
                     string title;
-                    bool found = false;
                     cout << "Inserisci il titolo della lista da rimuovere: ";
                     cin.ignore();
                     getline(cin, title);
                     cout << endl;
-                    auto it = setOfLists.begin();
-                    for(auto& list : setOfLists){
-                        if(title == list.getTitle()){
-                            found = true;
-                            setOfLists.erase(it);
-                            break;
-                        }
-                        else{
-                            advance(it, 1);
-                        }
-                    }
-                    if (found) {
-                        write(setOfLists);
-                        break;
-                    }
-                    else throw (out_of_range) "Lista non presente";
+                    setOfLists.removeList(title);
+                    write(setOfLists);
+                    break;
                 }
                 case 3:{
                     string title;
@@ -86,7 +66,7 @@ int main() {
                     cin.ignore();
                     getline(cin, title);
                     cout << endl;
-                    for(auto& list : setOfLists){
+                    for(auto& list : setOfLists.getSetOfLists()){
                         if(title == list.getTitle()){
                             string text;
                             int day;
@@ -121,7 +101,7 @@ int main() {
                     cin.ignore();
                     getline(cin, title);
                     cout << endl;
-                    for(auto& list : setOfLists){
+                    for(auto& list : setOfLists.getSetOfLists()){
                         if(title == list.getTitle()){
                             int pos;
                             found = true;
@@ -144,7 +124,7 @@ int main() {
                     cin.ignore();
                     getline(cin, title);
                     cout << endl;
-                    for(auto& list : setOfLists){
+                    for(auto& list : setOfLists.getSetOfLists()){
                         if(title == list.getTitle()){
                             int pos;
                             found = true;
@@ -161,21 +141,21 @@ int main() {
                     else throw (out_of_range) "Lista non presente";
                 }
                 case 6:{
-                    for (auto& list : setOfLists){
+                    for (auto& list : setOfLists.getSetOfLists()){
                         cout << "Lista: " << list.getTitle() << endl;
                         list.displayCompleted();
                     }
                     break;
                 }
                 case 7:{
-                    for (auto& list : setOfLists){
+                    for (auto& list : setOfLists.getSetOfLists()){
                         cout << "Lista: " << list.getTitle() << endl;
                         list.displayNotCompleted();
                     }
                     break;
                 }
                 case 8:{
-                    displayAll(setOfLists);
+                    setOfLists.displayAll();
                     break;
                 }
 
@@ -203,21 +183,11 @@ int main() {
 
 
 
-void displayAll(const std::vector<ToDoList>& setOfLists) {
-    for (const auto& list : setOfLists){
-        cout << "Lista: " << list.getTitle() << endl;
-        list.display();
-    }
-    cout << endl;
-}
-
-
-
-void write(const std::vector<ToDoList>& setOfLists) {
+void write( SetOfLists& setOfLists) {
     fstream file;
     file.open("list.txt", ios::out);
     if (file.is_open()) {
-        for (const auto& list : setOfLists) {
+        for (const auto& list : setOfLists.getSetOfLists()) {
             file << list.getTitle() << endl;
             for (const auto& toDo : list.getList()){
                 file << toDo.getText() << "   " << toDo.convertCompleted() << "   "  << toDo.getDate().getDay() << "/" << toDo.getDate().getMonth() << "/" << toDo.getDate().getYear() << endl;
@@ -229,8 +199,9 @@ void write(const std::vector<ToDoList>& setOfLists) {
 
 
 
-void read(std::vector<ToDoList>& setOfLists){
+void read(SetOfLists& setOfLists){
     fstream file;
+    auto& lists = setOfLists.getSetOfLists();
     file.open("list.txt", fstream::in);
     if (file.is_open()) {
         string line;
@@ -265,7 +236,7 @@ void read(std::vector<ToDoList>& setOfLists){
                         list.add(line, date, false);
                     }
                 }
-                setOfLists.push_back(list);
+                lists.push_back(list);
             }
         }
         file.close();
